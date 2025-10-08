@@ -1,16 +1,17 @@
-# React + Vite
+# UAH Hockey data site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+From 1985 to 2021, the University of Alabama in Huntsville, my alma mater, had a varsity hockey team. I helped create the official program record book by creating a database with player, game, and statistical data.
 
-Currently, two official plugins are available:
+For practice, I created a React app (via Vite) for a simple site that displays this data from an SQL Database. I plan to continue adding pages and features to it and eventually create a live site. For now, this is primarily for portfolio purposes to demonstrate my skills.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Details
 
-## React Compiler
+* The front end uses Axios to send requests to the back end API.
+* Tailwind CSS is imported in the front end, along with custom classes.
+* Tedious is used for SQL Server connections on Port 1433. Express is used for the API endpoints.
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Etc.
 
-## Expanding the ESLint configuration
+[UAH Hockey History & Records](https://uahchargers.com/sports/2012/9/17/MHOCKEY_0917123400)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Go Chargers!
