@@ -1,21 +1,27 @@
 import axios from "axios";
-import PlayersList from "../PlayersList";
+import PlayersList from "../components/PlayersList";
 import { useState, useEffect } from "react";
 
 export default function PlayersListPage() {
-  const [players, setPlayers] = useState([]); // Full player data
-  const [pageNumber, setPageNumber] = useState(1); // Page number of table
-  const [playersToDisplay, setPlayersToDisplay] = useState([]); // Slice of players to display
+  // Full player data
+  const [players, setPlayers] = useState([]);
+  // Page number of table
+  const [pageNumber, setPageNumber] = useState(1);
+  // Slice of players to display
+  const [playersToDisplay, setPlayersToDisplay] = useState([]);
+  // Max number of pages based on number of players (for dropdown)
   const [maxPages, setMaxPages] = useState(1);
+  // Number of players per page
   const valuesPerPage = 20;
 
+  /* Fetch the player data */
   useEffect(() => {
     const getPlayers = async () => {
       try {
         const response = await axios.get("/api/players");
         setPlayers(response.data);
-        setPlayersToDisplay(response.data.slice(0, valuesPerPage));       
-        setMaxPages(Math.floor(response.data.length / valuesPerPage) + 1);       
+        setPlayersToDisplay(response.data.slice(0, valuesPerPage));
+        setMaxPages(Math.floor(response.data.length / valuesPerPage) + 1);
       } catch (e) {
         console.log("ERROR: ", e);
       }
@@ -23,26 +29,31 @@ export default function PlayersListPage() {
     getPlayers();
   }, []);
 
+  /* Decrease page number if Previous button clicked */
   const goOnPrevPage = () => {
     if (pageNumber === 1) return;
     setPageNumber((prev) => prev - 1);
   };
 
+  /* Increase page number if Next button clicked */
   const goOnNextPage = () => {
     if (pageNumber === maxPages) return;
     setPageNumber((prev) => prev + 1);
   };
 
+  /* Set the page number if the dropdown option is selected */
   const handleSelectChange = (e) => {
     setPageNumber(e.target.value);
   };
 
+  /* Get the slice of players to display based on page number */
   useEffect(() => {
     const start = (pageNumber - 1) * valuesPerPage;
     const end = pageNumber * valuesPerPage;
     setPlayersToDisplay(players.slice(start, end));
   }, [pageNumber]);
 
+  /* Loading screen */
   if (players.length == 0) return <div>Loading...</div>;
 
   return (

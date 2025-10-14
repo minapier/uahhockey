@@ -2,7 +2,7 @@ import './App.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import PlayersListPage from './pages/PlayersListPage';
-import Layout from "./Layout";
+import Layout from "./components/Layout";
 import NotFoundPage from "./pages/NotFoundPage";
 
 const routes = [
