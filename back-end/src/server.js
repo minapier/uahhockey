@@ -5,15 +5,10 @@ import serverless from "serverless-http";
 dotenv.config();
 
 const app = express();
-// app.use(express.json());
+app.use(express.json());
 const PORT = process.env.SERVER_PORT || 3000;
 const SQL_PORT = parseInt(process.env.SQLSERVER_PORT, 10) || 1433;
 console.log(process.env.SQLSERVER);
-
-const router = Router();
-router.get("/hello", (req, res) => res.send("Hello World!"));
-app.use("/api/", router);
-export const handler = serverless(app);
 
 const sqlconfig = {
   server: process.env.SQLSERVER,
@@ -34,13 +29,14 @@ const sqlconfig = {
 };
 
 // Get Players Data
-app.get("/api/players", async (req, res) => {  
+app.get("/api/players", async (req, res) => {
   const connection = new Connection(sqlconfig);
   connection.on("connect", function (err) {
     if (err) {
       return res.status(500).json({ message: `${err}` });
     }
-    const sqlQuery = "SELECT player_id, last_name + ', ' + first_name AS player_name, CASE WHEN state IS NULL THEN hometown + ', ' + country ELSE hometown + ', ' + state END as player_hometown FROM uahhockey_players";
+    const sqlQuery =
+      "SELECT player_id, last_name + ', ' + first_name AS player_name, CASE WHEN state IS NULL THEN hometown + ', ' + country ELSE hometown + ', ' + state END as player_hometown FROM uahhockey_players";
     const sqlRequest = new Request(sqlQuery, (err, rowCount) => {
       if (err) {
         if (err) {
@@ -60,9 +56,12 @@ app.get("/api/players", async (req, res) => {
       rows.push(row);
     });
 
-    sqlRequest.on("doneProc", (rowCount, more, returnStatus, outputParameters) => {
-      res.json(rows); // Send the collected rows as JSON
-    });
+    sqlRequest.on(
+      "doneProc",
+      (rowCount, more, returnStatus, outputParameters) => {
+        res.json(rows); // Send the collected rows as JSON
+      },
+    );
 
     connection.execSql(sqlRequest);
   });
@@ -76,3 +75,4 @@ async function start() {
 }
 
 start();
+export const handler = serverless(app);
