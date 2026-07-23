@@ -1,12 +1,19 @@
-import express from "express";
+import express, { Router } from "express";
 import dotenv from "dotenv";
 import { Connection, Request } from "tedious";
+import serverless from "serverless-http";
 dotenv.config();
 
 const app = express();
-app.use(express.json());
-const PORT = process.env.PORT || 3000;
+// app.use(express.json());
+const PORT = process.env.SERVER_PORT || 3000;
 const SQL_PORT = parseInt(process.env.SQLSERVER_PORT, 10) || 1433;
+console.log(process.env.SQLSERVER);
+
+const router = Router();
+router.get("/hello", (req, res) => res.send("Hello World!"));
+app.use("/api/", router);
+export const handler = serverless(app);
 
 const sqlconfig = {
   server: process.env.SQLSERVER,
