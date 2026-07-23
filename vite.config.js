@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://rmmw51t8-3000.use2.devtunnels.ms",
+        target: "https://uahhockey.netlify.app",
         changeOrigin: true,
       },
     },
