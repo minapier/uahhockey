@@ -28,6 +28,10 @@ const sqlconfig = {
   },
 };
 
+router.get("/test", (req, res) => {
+  return res.json({ message: "API is found." });
+})
+
 router.get("/players", async (req, res) => {
   const connection = new Connection(sqlconfig);
   connection.on("connect", function (err) {
