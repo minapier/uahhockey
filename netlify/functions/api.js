@@ -22,8 +22,7 @@ const sqlconfig = {
   options: {
     database: process.env.SQLSERVER_DATABASE,
     encrypt: true,
-    integratedSecurity: true,
-    trustServerCertificate: true,
+    trustServerCertificate: false,
     port: Number(process.env.SQLSERVER_PORT),
   },
 };
