@@ -14,6 +14,7 @@ dist-ssr
 back-end
 test
 .env
+.env-prod
 .next
 next-env.d.ts
 
