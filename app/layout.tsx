@@ -1,4 +1,4 @@
-// import "./src/styles.css"
+import "./ui/global.css";
 import NavBar from "../components/navbar";
 
 export const metadata = {
@@ -6,7 +6,7 @@ export const metadata = {
     description: "This is a sample website on Netlify using Next.js to display legacy UAH Hockey statistics from a SQL Server database on Microsoft Azure."
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>

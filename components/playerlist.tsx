@@ -1,4 +1,10 @@
-export default function PlayersList({ players }) {
+interface PlayerProps {
+  player_id: number,
+  player_name: string
+  player_hometown: string
+}
+
+export default function PlayerList({ players }: { players: PlayerProps[] }) {
   return (
     <table>
       <thead>
@@ -8,7 +14,7 @@ export default function PlayersList({ players }) {
         </tr>
       </thead>
       <tbody>
-        {players.map((p) => {
+        {players.map((p: PlayerProps) => {
           return (
             <tr key={p.player_id}>
               <td>{p.player_name}</td>
