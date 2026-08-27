@@ -1,5 +1,5 @@
-import axios from "axios";
-import PlayersList from "../components/PlayersList";
+"use client"
+import PlayerList from "../../components/playerlist";
 import { useState, useEffect } from "react";
 
 export default function PlayersListPage() {
@@ -12,18 +12,20 @@ export default function PlayersListPage() {
   // Max number of pages based on number of players (for dropdown)
   const [maxPages, setMaxPages] = useState(1);
   // Number of players per page
-  const valuesPerPage = 20;
+  const valuesPerPage: number = 20;
 
   /* Fetch the player data */
   useEffect(() => {
     const getPlayers = async () => {
       try {
-        const response = await axios.get("/api/players");
-        setPlayers(response.data);
-        setPlayersToDisplay(response.data.slice(0, valuesPerPage));
-        setMaxPages(Math.floor(response.data.length / valuesPerPage) + 1);
+        const response = await fetch("/api/players");
+        const data = await response.json();
+        console.log("response = ", data)
+        setPlayers(data);
+        setPlayersToDisplay(data.slice(0, valuesPerPage));
+        setMaxPages(Math.floor(data.length / valuesPerPage) + 1);
       } catch (e) {
-        console.log("ERROR: ", e);
+        console.log("ERROR! ", e);
       }
     };
     getPlayers();
@@ -42,8 +44,8 @@ export default function PlayersListPage() {
   };
 
   /* Set the page number if the dropdown option is selected */
-  const handleSelectChange = (e) => {
-    setPageNumber(e.target.value);
+  const handleSelectChange: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
+    setPageNumber(Number(e.target.value));
   };
 
   /* Get the slice of players to display based on page number */
@@ -79,7 +81,7 @@ export default function PlayersListPage() {
               })}
           </select>
         </div>
-        <PlayersList players={playersToDisplay} />
+        <PlayerList players={playersToDisplay} />
         <div id="btn-container">
           <button onClick={goOnPrevPage} disabled={pageNumber === 1}>
             Prev
