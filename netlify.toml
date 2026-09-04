@@ -1,7 +1,7 @@
 [build]
   functions = "netlify/functions"
-  publish = ".next"
   command = "npm run build"
+  publish = ".next"
 [functions]
   external_node_modules = ["express"]
   node_bundler = "esbuild"
