@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import PlayerList from "../../components/playerlist";
 import { useState, useEffect } from "react";
 
@@ -11,6 +11,8 @@ export default function PlayersListPage() {
   const [playersToDisplay, setPlayersToDisplay] = useState([]);
   // Max number of pages based on number of players (for dropdown)
   const [maxPages, setMaxPages] = useState(1);
+  // Loading state
+  const [isLoading, setIsLoading] = useState(true);
   // Number of players per page
   const valuesPerPage: number = 20;
 
@@ -20,12 +22,13 @@ export default function PlayersListPage() {
       try {
         const response = await fetch("/api/players");
         const data = await response.json();
-        console.log("response = ", data)
         setPlayers(data);
         setPlayersToDisplay(data.slice(0, valuesPerPage));
         setMaxPages(Math.floor(data.length / valuesPerPage) + 1);
       } catch (e) {
         console.log("ERROR! ", e);
+      } finally {
+        setIsLoading(false);
       }
     };
     getPlayers();
@@ -44,7 +47,9 @@ export default function PlayersListPage() {
   };
 
   /* Set the page number if the dropdown option is selected */
-  const handleSelectChange: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
+  const handleSelectChange: React.ChangeEventHandler<HTMLSelectElement> = (
+    e,
+  ) => {
     setPageNumber(Number(e.target.value));
   };
 
@@ -55,20 +60,19 @@ export default function PlayersListPage() {
     setPlayersToDisplay(players.slice(start, end));
   }, [pageNumber]);
 
-  /* Loading screen */
-  if (players.length == 0) return <div>Loading...</div>;
-
+  if (isLoading) return <p>Loading players...</p>;
+  
   return (
     <>
       <h1>UAH Hockey Players</h1>
-      <div className="text-left">
-        <p>
-          {players.length} players found. Displaying page {pageNumber}.
-        </p>
-      </div>
-
       <div id="container">
+        <div className="text-left">
+          <p>
+            {players.length} players found. Displaying page {pageNumber}.
+          </p>
+        </div>
         <div id="page-no-dropdown">
+          Select page:
           <select
             name="page-number"
             onChange={handleSelectChange}
