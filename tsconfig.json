@@ -30,9 +30,7 @@
     "dist/dev/types/**/*.ts",
     "**/*.mts",
     "**/*.ts",
-    "**/*.tsx",
-    "./dist/types/**/*.ts",
-    "./dist/dev/types/**/*.ts"
+    "**/*.tsx"
   ],
   "exclude": [
     "node_modules"
