@@ -35,9 +35,9 @@ export default function PlayerInfoPage() {
   const params = useParams<{ player_id: string }>();
   const player_id = params?.player_id;
 
-  // Player ID
   // Loading state
   const [isLoading, setIsLoading] = useState(true);
+  // Player state
   const [playerInfo, setPlayerInfo] = useState({
     player_id: player_id,
     player_name: "NA",
@@ -88,10 +88,12 @@ export default function PlayerInfoPage() {
           <div className="tcell">T</div>
           <div className="tcell">Mins</div>
           <div className="tcell">GA</div>
+          <div className="tcell">GAA</div>
           <div className="tcell">SV</div>
           <div className="tcell">SO</div>
         </div>
         {playerStats.map((s: PlayerStats) => {
+          let gaa = ((s.goals_against / s.minutes) * 60).toFixed(2);
           return (
             <div className="trow" key={s.rec_id}>
               <div className="tcell">{s.season}</div>
@@ -110,6 +112,7 @@ export default function PlayerInfoPage() {
               <div className="tcell">{s.ties}</div>
               <div className="tcell">{s.minutes}</div>
               <div className="tcell">{s.goals_against}</div>
+              <div className="tcell">{gaa}</div>
               <div className="tcell">{s.saves}</div>
               <div className="tcell">{s.shutouts}</div>
             </div>
