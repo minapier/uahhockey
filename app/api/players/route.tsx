@@ -1,4 +1,3 @@
-// YOUR_BASE_DIRECTORY/netlify/functions/api.ts
 import express, { Router } from "express";
 import serverless from "serverless-http";
 import { NextResponse } from "next/server";
@@ -11,26 +10,6 @@ const api = express();
 const router = Router();
 api.use(express.json());
 api.use("/api/", router);
-
-export const dynamic = "force-static";
-
-const sqlconfig = {
-  server: process.env.SQLSERVER,
-  authentication: {
-    type: "default",
-    options: {
-      userName: process.env.SQLSERVER_USERNAME,
-      password: process.env.SQLSERVER_PASSWORD,
-    },
-  },
-  options: {
-    database: process.env.SQLSERVER_DATABASE,
-    encrypt: true,
-    trustServerCertificate: Boolean(process.env.SQLSERVER_TRUSTCERT),
-    port: Number(process.env.SQLSERVER_PORT),
-  },
-};
-
 
 export async function GET() {
   try {

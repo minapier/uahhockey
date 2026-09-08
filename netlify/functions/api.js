@@ -38,7 +38,7 @@ router.get("/players", async (req, res) => {
       return res.status(500).json({ message: `${err}` });
     }
     const sqlQuery =
-      "SELECT player_id, last_name + ', ' + first_name AS player_name, CASE WHEN state IS NULL THEN hometown + ', ' + country ELSE hometown + ', ' + state END as player_hometown FROM uahhockey_players";
+      "SELECT player_id, last_name + ', ' + first_name AS player_name, CASE WHEN state IS NULL THEN hometown + ', ' + country ELSE hometown + ', ' + state END as player_hometown FROM uahhockey_players ORDER BY last_name, first_name";
     const sqlRequest = new Request(sqlQuery, (err, rowCount) => {
       if (err) {
         if (err) {
