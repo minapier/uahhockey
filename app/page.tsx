@@ -14,8 +14,7 @@ export default function HomePage() {
       </p>
       <ul>
         <li>Microsoft SQL Server database hosted on Azure</li>
-        <li>Next.js React project using App Router</li>
-        <li>Express.js for back-end APIs</li>
+        <li>Next.js React project using App Router, also for API routes</li>
         <li>Site deployed on Netlify</li>
         <li>
           <a href="https://github.com/minapier/uahhockey" target="_blank">

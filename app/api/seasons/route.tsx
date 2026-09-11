@@ -1,15 +1,8 @@
-import express, { Router } from "express";
-import serverless from "serverless-http";
 import { NextResponse } from "next/server";
 import { getDbConnection } from "../../../lib/db";
 
 import dotenv from "dotenv";
 dotenv.config();
-
-const api = express();
-const router = Router();
-api.use(express.json());
-api.use("/api/", router);
 
 export async function GET() {
   try {
@@ -26,5 +19,3 @@ export async function GET() {
     );
   }
 }
-
-export const handler = serverless(api);
