@@ -1,15 +1,8 @@
-import express, { Router } from "express";
-import serverless from "serverless-http";
 import { NextRequest, NextResponse } from "next/server";
 import { getDbConnection } from "../../../../lib/db";
 
 import dotenv from "dotenv";
 dotenv.config();
-
-const api = express();
-const router = Router();
-api.use(express.json());
-api.use("/api/", router);
 
 export const dynamic = "force-static";
 
@@ -53,5 +46,3 @@ export async function GET(request: NextRequest, props: RouteProps) {
     );
   }
 }
-
-export const handler = serverless(api);

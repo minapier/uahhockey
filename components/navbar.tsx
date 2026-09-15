@@ -10,8 +10,14 @@ export default function NavBar() {
           <Link href="/">Home</Link>
         </li>
         <li>
-          <Link href="/players">UAH Hockey Players</Link>
-        </li>        
+          <Link href="/players">Players</Link>
+        </li>
+        <li>
+          <Link href="/seasons">Seasons</Link>
+        </li>
+        <li>
+          <Link href="https://github.com/minapier/uahhockey" target="_blank">GitHub</Link>
+        </li>
       </ul>
     </nav>
   );
