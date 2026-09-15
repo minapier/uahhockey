@@ -30,8 +30,12 @@ export default function SeasonList({ seasons }: { seasons: SeasonResults[] }) {
         {seasons.map((s: SeasonResults) => {
           return (
             <tr key={s.season}>
-              <td>{s.season}</td>
-              <td>{s.wins}-{s.losses}-{s.ties}</td>
+              <td>
+                <Link href={`/seasons/${s.season}`}>{s.season}</Link>
+              </td>
+              <td>
+                {s.wins}-{s.losses}-{s.ties}
+              </td>
             </tr>
           );
         })}

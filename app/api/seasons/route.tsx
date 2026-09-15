@@ -7,7 +7,7 @@ dotenv.config();
 export async function GET() {
   try {
     const playersQuery =
-      "SELECT season, COUNT(CASE WHEN result = 'W' THEN 1 END) AS wins, COUNT(CASE WHEN result = 'L' THEN 1 END) AS losses, COUNT(CASE WHEN result = 'T' THEN 1 END) AS ties FROM uahhockey_results GROUP BY season ORDER BY season";
+      "SELECT season, COUNT(CASE WHEN result = 'W' THEN 1 END) AS wins, COUNT(CASE WHEN result = 'L' THEN 1 END) AS losses, COUNT(CASE WHEN result = 'T' THEN 1 END) AS ties FROM uahhockey_results WHERE (event IS NULL OR event <> 'Exhibition') GROUP BY season ORDER BY season";
     const pool = await getDbConnection();
     const result = await pool.request().query(playersQuery);
     return NextResponse.json(result.recordset, { status: 200 });
