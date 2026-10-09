@@ -4,21 +4,27 @@ import Link from "next/link"
 
 export default function NavBar() {
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link href="/">Home</Link>
-        </li>
-        <li>
-          <Link href="/players">Players</Link>
-        </li>
-        <li>
-          <Link href="/seasons">Seasons</Link>
-        </li>
-        <li>
-          <Link href="https://github.com/minapier/uahhockey" target="_blank">GitHub</Link>
-        </li>
-      </ul>
+    <nav className="navbar bg-color-uah-blue">
+      <div className="navbar_container padding-global">
+        <Link className="title-text navbar_link" href="/">
+          UAH Hockey Resource Site
+        </Link>
+        <div className="navbar_links">
+          <Link className="navbar_link" href="/players">
+            Players
+          </Link>
+          <Link className="navbar_link" href="/seasons">
+            Seasons
+          </Link>
+          <Link
+            className="navbar_link"
+            href="https://github.com/minapier/uahhockey"
+            target="_blank"
+          >
+            GitHub
+          </Link>
+        </div>
+      </div>
     </nav>
   );
 }
