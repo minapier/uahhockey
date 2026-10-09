@@ -30,7 +30,7 @@ export default function SeasonListPage() {
   return (
     <>
       <h1>UAH Hockey Seasons</h1>
-      <div id="container">
+      <div>
         <SeasonList seasons={seasons} />
       </div>
     </>
